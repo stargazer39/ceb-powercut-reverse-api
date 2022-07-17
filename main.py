@@ -31,7 +31,7 @@ def get_power_cut_details(group_letter: str, token: str):
     return json.loads(string[1:-1])
 
 
-@app.get("/power_cuts/{group}")
+@app.get("/group/{group}/power_cuts")
 async def power_cuts(group):
     token = get_verification_token()
     details = get_power_cut_details(group, token)
