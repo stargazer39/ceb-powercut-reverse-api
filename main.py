@@ -2,7 +2,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from fastapi import FastAPI
-import gunicorn
+import gunicorn, uvicorn
 
 ceb_home = "https://cebcare.ceb.lk/Incognito/DemandMgmtSchedule"
 ceb_power_cut_details_endpoint = "https://cebcare.ceb.lk/Incognito/GetLoadSheddingGeoAreas"
