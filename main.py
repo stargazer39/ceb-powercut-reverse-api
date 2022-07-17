@@ -63,7 +63,10 @@ async def power_cuts(group: str):
     token = get_verification_token()
     details = get_all_power_cut_events(token)
 
+    power_list = []
+
     for power_details in details:
         if 'loadShedGroupId' in power_details and power_details['loadShedGroupId'] == group.capitalize():
-            return remap(power_details, visit=drop_falsey)
-    return {}
+            power_list.append(remap(power_details, visit=drop_falsey))
+    
+    return power_list
