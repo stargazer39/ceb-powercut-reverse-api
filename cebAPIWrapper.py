@@ -25,7 +25,7 @@ class CebAPI:
         html = self.r_session.get(self.ceb_home, verify=False).text
         soup = BeautifulSoup(html, 'html.parser')
         token = soup.find("input", attrs={ "name": "__RequestVerificationToken" })
-        
+
         return token.attrs.get("value")
     
     def _get_all_power_cut_events(self):
@@ -52,6 +52,9 @@ class CebAPI:
             self.refresh_token()
             res = self._get_all_power_cut_events()
         
+        if res.status_code != 200:
+            raise Exception(f"Request to CEB API failed with {res.status_code}")
+
         return remap(res.json(), visit=drop_falsey)
     
     def get_group_power_cut_events(self, group: str):
@@ -74,6 +77,9 @@ class CebAPI:
                 },
                 verify=False
             )
+        
+        if res.status_code != 200:
+            raise Exception(f"Request to CEB API failed with {res.status_code}")
 
         string = res.content.decode('unicode_escape')
         return json.loads(string[1:-1])
