@@ -3,8 +3,6 @@ from fastapi import FastAPI
 from cebAPIWrapper import CebAPI
 from utils import retry_util
 
-import gunicorn, uvicorn
-
 app = FastAPI()
 ceb_api = CebAPI()
 
