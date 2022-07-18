@@ -63,9 +63,10 @@ class CebAPI:
         power_list = []
 
         for power_details in details:
-            if 'loadShedGroupId' in power_details and power_details['loadShedGroupId'] == group.capitalize():
+            if 'loadShedGroupId' in power_details and power_details['loadShedGroupId'].capitalize() == group.capitalize():
                 power_list.append(remap(power_details, visit=drop_falsey))
-        return power_details
+
+        return power_list
     
     def _get_power_cut_details(self,group_letter: str):
         res = self.r_session.get(self.ceb_power_cut_details_endpoint, 
